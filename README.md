@@ -9,7 +9,7 @@ Choose the folder you have extracted the files .
 
 And you are good to go .......
 
--------------------About the extension-------------------
+-------------------About the extension------------------- <br>
 You have 3 buttons 
 
 Save input  - To save the website you inserted in the text field.
