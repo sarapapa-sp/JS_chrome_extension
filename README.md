@@ -1,4 +1,4 @@
-# JS_chrome_extension
+# Chrome extension for leads tracker
 
 Download the file as zip 
 Extract the files in a folder.
