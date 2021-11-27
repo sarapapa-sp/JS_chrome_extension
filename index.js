@@ -1,43 +1,47 @@
-
-let myLead = ["www.amizone.com","www.messaio.io"]
+let myLeads = []
 const inputEl = document.getElementById("input-el")
-const saveBtn = document.getElementById("save-btn")
-const ulEl = document.getElementById("up-el")
+const inputBtn = document.getElementById("input-btn")
+const ulEl = document.getElementById("ul-el")
 const deleteBtn = document.getElementById("delete-btn")
+const leadsFromLocalStorage = JSON.parse( localStorage.getItem("myLeads") )
+const tabBtn = document.getElementById("tab-btn")
 
-const leadsFromStorage = JSON.parse(localStorage.getItem("myLeads"))
-if(leadsFromStorage){
-    myLead = leadsFromStorage
-    render()
+if (leadsFromLocalStorage) {
+    myLeads = leadsFromLocalStorage
+    render(myLeads)
 }
 
-saveBtn.addEventListener("click",function() {
-    myLead.push(inputEl.value)
-    inputEl.value = ""
-    localStorage.setItem("myLeads", JSON.stringify(myLead))
-
-    render()
+tabBtn.addEventListener("click", function(){    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        myLeads.push(tabs[0].url)
+        localStorage.setItem("myLeads", JSON.stringify(myLeads) )
+        render(myLeads)
+    })
 })
 
-function render() {
-    let my=""
-    for(let i=0 ; i<myLead.length ; i++){
-
-        my += `
-        <li>
-            <a target="_blank" href="${myLead[i]}">
-                ${myLead[i]}
-            </a>    
-        </li>
+function render(leads) {
+    let listItems = ""
+    for (let i = 0; i < leads.length; i++) {
+        listItems += `
+            <li>
+                <a target='_blank' href='${leads[i]}'>
+                    ${leads[i]}
+                </a>
+            </li>
         `
     }
-
-ulEl.innerHTML = my
+    ulEl.innerHTML = listItems
 }
-// Logging out the elements in myLead
 
-deleteBtn.addEventListener("dblclick",function() {
+deleteBtn.addEventListener("dblclick", function() {
     localStorage.clear()
-    myLead = []
-    render()
+    myLeads = []
+    render(myLeads)
+})
+
+inputBtn.addEventListener("click", function() {
+    myLeads.push(inputEl.value)
+    inputEl.value = ""
+    localStorage.setItem("myLeads", JSON.stringify(myLeads) )
+    render(myLeads)
 })
