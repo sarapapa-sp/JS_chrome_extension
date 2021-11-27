@@ -3,9 +3,9 @@
 Download the file as zip 
 Extract the files in a folder.
 
-Go to your Chrome browser and open extensions.
-Turn on the developers mode and click on load unpacked.
-Choose the folder you have extracted the files .
+Go to your Chrome browser and open extensions. <br>
+Turn on the developers mode and click on load unpacked. <br>
+Choose the folder you have extracted the files .<br>
 
 And you are good to go .......
 
